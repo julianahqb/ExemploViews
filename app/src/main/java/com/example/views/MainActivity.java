@@ -4,7 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.RadioButton;
+
 
 import com.example.views.databinding.ActivityMainBinding;
 
@@ -47,8 +48,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     + binding.edtEmail.getText().toString());
             binding.txtTelefone.setText("Telefone: "
                     + binding.edtTelefone.getText().toString());
+            if(binding.swtWhats.isChecked()){
+                binding.txtWhats.setText("WhatsApp: "
+                +binding.swtWhats.getTextOn());
+            }else{
+                binding.txtWhats.setText("WhatsApp: "
+                        +binding.swtWhats.getTextOff());
+            }
 
+            int idrdbSelecionado = binding.rdgPeriodo.getCheckedRadioButtonId();
+            if(idrdbSelecionado > 0){
+                RadioButton rdbSelecionado = findViewById(idrdbSelecionado);
+                binding.txtPeriodo.setText("Período: "
+                        + rdbSelecionado.getText().toString());
+            }
 
+            String pref="";
+            if(binding.chkInternet.isChecked())
+                pref = binding.chkInternet.getText().toString();
+            if(binding.chkTelefone.isChecked()){
+                pref += " ";
+                pref += binding.chkTelefone.getText().toString();
+            }
+            if(binding.chkTv.isChecked()){
+                pref += " ";
+                pref += binding.chkTv.getText().toString();
+            }
+            if(binding.chkStreaming.isChecked()){
+                pref += " ";
+                pref += binding.chkStreaming.getText().toString();
+            }
+            binding.txtPref.setText("Preferências: " + pref);
         }
     }
 }
